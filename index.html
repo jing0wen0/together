@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>让我们在一起</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style0.css">
+  </head>
+
+  <body>
+    <!-- 荧光S -->
+    <div class="container">
+      <!-- 打字 -->
+      <div class="typing">
+        <!-- 字幕 -->
+        <h2 class="header-sub-title" id="word"></h2>
+        <h2 class="header-sub-title blink">|</h2>
+      </div>
+
+      <audio controls="" autoplay=""><source src="mp3/123.mp3"></audio>
+      <!-- 相册 -->
+      <div class="box">
+        <ul class="minbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <ol class="maxbox">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+
+    <script src="style//jquery.min.js"></script>
+    <script src="style//TweenMax.min.js"></script>
+    <script src="style//index.js"></script>
+
+    <script>
+      /* 兼容H5 手机端 */
+      if (
+        navigator.userAgent.match(
+          /(phone|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        )
+      ) {
+        var box = document.querySelectorAll(".box")[0];
+        console.log(box, "移动端");
+        box.style.left = "42%";
+      }
+      // --------------------打印字 S--------------------------
+      const words = [
+        "❤ ~ 阿静 ~ 让我们在一起，在一起，在一起！ ❤ ",
+        "❤ 情书给你一封，情话给你一句，余生给你一人。",
+        "❤ 我喜欢你，从黑夜到黎明，从冷冬到暖春，从一秒到一生，生生不息，轮回不止。",
+        "❤ 和你一起，一日三餐，一年四季，你会是我一生的归宿。",
+        "❤ 酸甜苦辣与你分享，三餐四季与你共度，这才是最美的爱情。",
+        "❤ 你是我乍见之欢，你是我的眼神所向，你是我温柔的归宿，你是我嘴角扬起的理由，你是我日复一日的梦想。",
+        "❤ 我不擅长恋爱，但我天生爱你。",
+        "❤ 你的出现像一颗恒星，穿过黑夜照亮我的生命。",
+        "❤ 1个宇宙，9大行星，204个国家，809个岛屿，7个大洋，竟让我在茫茫人海遇见你，遇见你，遇见你。",
+        "❤ 我这一生都是坚定不移的唯物主义者，唯有你，我希望有来生。",
+        "❤ 世界很大，我心太小，只容得下一个你。",
+        "❤ 我们在一起吧，要走到最后，要结婚，要过日子，要相濡以沫，要携手终身。",
+      ];
+      let PPP = 0;
+      let timer;
+      // speed in ms
+      let deleteDelay = 3000;
+      let typeSpeed = 200;
+      let delSpeed = 50;
+      /* 开始编写文字 */
+      function typingEffect() {
+        console.log(i, "iiii");
+        console.log(words[PPP], "words[i]");
+        let word = words[PPP].split("");
+        var loopTyping = function () {
+          if (word.length > 0) {
+            document.getElementById("word").innerHTML += word.shift();
+          } else {
+            delay(function () {
+              deletingEffect(); // do stuff
+            }, deleteDelay); // end delay
+            // deletingEffect();
+            return false;
+          }
+          timer = setTimeout(loopTyping, typeSpeed);
+        };
+        loopTyping();
+      }
+
+      function deletingEffect() {
+        let word = words[PPP].split("");
+        var loopDeleting = function () {
+          if (word.length > 0) {
+            word.pop();
+            document.getElementById("word").innerHTML = word.join("");
+          } else {
+            if (words.length > PPP + 1) {
+              PPP++;
+            } else {
+              PPP = 0;
+            }
+            typingEffect();
+            return false;
+          }
+
+          timer = setTimeout(loopDeleting, delSpeed);
+        };
+
+        loopDeleting();
+      }
+
+      var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+          clearTimeout(timer);
+          timer = setTimeout(callback, ms);
+        };
+      })();
+      typingEffect();
+      // --------------------打印字 E--------------------------
+    </script>
+  
+  </body>
+</html>
